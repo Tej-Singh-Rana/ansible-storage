@@ -1,0 +1,57 @@
+---
+ - name: ACL's list in stapp01
+   hosts: stapp01
+   gather_facts: false
+   become: true
+   tasks:
+    - name: Creating empty file
+      file:
+        path: /opt/dba/blog.txt
+        owner: root
+        group: root
+        state: touch
+    - name: Assign ACL permission
+      acl:
+        path: /opt/dba/blog.txt
+        entity: tony
+        etype: group
+        state: present
+        permissions: r
+
+ - name: ACL's list in stapp02
+   hosts: stapp02
+   gather_facts: false
+   become: true
+   tasks:
+    - name: Creating empty file
+      file:
+        path: /opt/dba/story.txt
+        owner: root
+        group: root
+        state: touch
+    - name: Assign ACL permission
+      acl:
+        path: /opt/dba/story.txt
+        entity: steve
+        etype: user
+        state: present
+        permissions: rw
+
+ - name: ACL's list in stapp03
+   hosts: stapp03
+   gather_facts: false
+   become: true
+   tasks:
+    - name: Creating empty file
+      file:
+        path: /opt/dba/media.txt
+        owner: root
+        group: root
+        state: touch
+    - name: Assign ACL permission
+      acl:
+        path: /opt/dba/media.txt
+        entity: banner
+        etype: group
+        state: present
+        permissions: rw
