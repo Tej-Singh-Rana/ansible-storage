@@ -1,0 +1,70 @@
+---
+  - hosts: stapp01
+    gather_facts: false      # Ignore to sync system information
+    become: true             # become sudoers aka half root
+    tasks:
+      - name: installing httpd package
+        yum:
+         name: httpd
+         state: present
+         update_cache: yes
+      - name: start and enable the httpd service
+        service:
+           name: httpd
+           enabled: yes
+           state: started
+      - name: adding content in index.html file
+        blockinfile:
+          create: yes            # create file if not exist
+          path: /var/www/html/index.html          # location of file
+          block: |
+            <message body>
+          group: apache
+          owner: apache
+          mode: '0755'
+  - hosts: stapp02
+    gather_facts: false
+    become: true
+    tasks:
+      - name: installing httpd 
+        yum:
+         name: httpd
+         state: present
+         update_cache: yes
+      - name: start and enable the httpd service
+        service:
+           name: httpd
+           enabled: yes
+           state: started
+      - name: adding content in index.html file
+        blockinfile:
+          create: yes
+          path: /var/www/html/index.html
+          block: |
+            <message body>
+          group: apache
+          owner: apache
+          mode: '0755'
+  - hosts: stapp03
+    gather_facts: false
+    become: true
+    tasks:
+      - name: installing httpd 
+        yum:
+         name: httpd
+         state: present
+         update_cache: yes
+      - name: start and enable the httpd service
+        service:
+           name: httpd
+           enabled: yes
+           state: started
+      - name: adding content in index.html file
+        blockinfile:
+          create: yes
+          path: /var/www/html/index.html
+          block: |
+            <message body>
+          group: apache
+          owner: apache
+          mode: '0755'

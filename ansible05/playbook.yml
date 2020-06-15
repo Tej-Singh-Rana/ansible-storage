@@ -1,0 +1,35 @@
+---
+  - hosts: all
+    gather_facts: true
+    become: true
+    tasks:
+      - name: Copying items with help of copy module
+        copy:
+          src: /usr/src/finance/blog.txt
+          dest: /opt/finance/blog.txt
+          owner: tony
+          group: tony
+          mode: '0655'
+        hosts: stapp01
+        become: true
+        when: ansible_nodename == "os-name"
+      - name: Copying items with help of copy module
+        copy:
+          src: /usr/src/finance/blog.txt
+          dest: /opt/finance/blog.txt
+          owner: steve
+          group: steve
+          mode: '0655'
+        hosts: stapp02
+        become: true
+        when: ansible_nodename == "os-name"
+      - name: Copying items with help of copy module
+        copy:
+          src: /usr/src/finance/blog.txt
+          dest: /opt/finance/blog.txt
+          owner: banner
+          group: banner
+          mode: '0655'
+        hosts: stapp03
+        become: true
+        when: ansible_nodename == "os-name"
