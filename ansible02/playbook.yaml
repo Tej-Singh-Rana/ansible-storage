@@ -1,0 +1,34 @@
+---
+	- hosts: group01
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: empty file 
+		    file:
+		      path: /tmp/webapp.txt
+		      state: touch
+		      mode: '0644'
+		      owner: rahul
+		      group: rahul
+	- hosts: group02
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: empty file 
+		    file:
+		      path: /tmp/webapp.txt
+		      state: touch
+		      mode: '0644'
+		      owner: krishna
+		      group: krishna
+	- hosts: group03
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: empty file 
+		    file:
+		      path: /tmp/webapp.txt
+		      state: touch
+		      mode: '0644'
+		      owner: ram
+		      group: ram
