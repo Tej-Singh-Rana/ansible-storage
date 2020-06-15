@@ -1,1 +1,10 @@
+---
+ - hosts: localhost
+   become: true
+   gather_facts: false
+   tasks:
+    - name: service module to install packages
+      yum:
+        name: <service-name>
+        state: <present or latest>
 
