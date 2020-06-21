@@ -1,0 +1,34 @@
+---
+  - name: Archive files
+    hosts: host01
+    gather_facts: false
+    tasks:
+    - name: archive files 
+      unarchive:
+        src: /usr/src/itadmin/nautilus.zip
+        dest: /opt/itadmin/
+        owner: user01
+        group: user01
+        mode:  '0755'
+  - name: Archive files
+    hosts: host02
+    gather_facts: false
+    tasks:
+    - name: archive files 
+      unarchive:
+        src: /usr/src/itadmin/nautilus.zip
+        dest: /opt/itadmin/
+        owner: user02
+        group: user02
+        mode:  '0755'
+  - name: Archive files
+    hosts: host03
+    gather_facts: false
+    tasks:
+    - name: archive files 
+      unarchive:
+        src: /usr/src/itadmin/nautilus.zip
+        dest: /opt/itadmin/
+        owner: user03
+        group: user03
+        mode:  '0755'
