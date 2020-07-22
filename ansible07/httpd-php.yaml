@@ -1,0 +1,45 @@
+---
+ - name: Installing httpd-php packages
+   hosts: stapp02
+   gather_facts: no
+   become: true
+   tasks:
+    - name: httpd installation
+      yum:
+        name:
+          - httpd
+          - php
+          - php-cli
+          - php-fpm
+          - php-curl
+          - php-json
+          - php-mysqlnd
+          - php-pdo
+          - php-gd
+          - php-xml
+          - php-xmlrpc
+        state: present
+
+    - name: Creating directory
+      file:
+        path: /var/www/html/myroot
+        state: directory
+
+    - name: Changing default document root
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: '^DocumentRoot "/var/www/html"$'
+        replace: 'DocumentRoot "/var/www/html/myroot"'
+
+    - name: Template jinja
+      template:
+        src: "/home/john/playbooks/templates/phpinfo.php.j2"
+        dest: "/var/www/html/myroot/phpinfo.php"
+        owner: apache
+        group: apache
+
+    - name: Restarting service
+      service:
+        name: httpd
+        enabled: yes
+        state: started
