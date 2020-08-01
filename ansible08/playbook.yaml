@@ -1,0 +1,37 @@
+---
+  - name: archive module
+    hosts: stapp01
+    gather_facts: no
+    become: yes
+    tasks:
+      - name: archive module
+        archive:
+          path: /usr/src/finance
+          dest: /opt/finance/cluster.tar.gz
+          owner: tony
+          group: tony
+          format: gz 
+  - name: archive module
+    hosts: stapp02
+    gather_facts: no
+    become: yes
+    tasks:
+      - name: archive module
+        archive:
+          path: /usr/src/finance
+          dest: /opt/finance/cluster.tar.gz
+          owner: steve
+          group: steve
+          format: gz
+  - name: archive module
+    hosts: stapp03
+    gather_facts: no
+    become: yes
+    tasks:
+      - name: archive module
+        archive:
+          path: /usr/src/finance
+          dest: /opt/finance/cluster.tar.gz
+          owner: banner
+          group: banner
+          format: gz    
