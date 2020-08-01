@@ -3,7 +3,7 @@
     gather_facts: false
     become: true
     tasks:
-      - name: Copying items with help of copy module
+      - name: Copying items with help of copy module.
         copy:
           src: /usr/src/finance/blog.txt
           dest: /opt/finance/blog.txt
@@ -14,18 +14,18 @@
     gather_facts: false
     become: true
     tasks:
-      - name: Copying items with help of copy module
+      - name: Copying items with help of copy module.
         copy:
           src: /usr/src/finance/blog.txt
           dest: /opt/finance/blog.txt
           owner: steve
           group: steve
           mode: '0655'
-  - hosts: stapp01
+  - hosts: stapp03
     gather_facts: false
     become: true
     tasks:
-      - name: Copying items with help of copy module
+      - name: Copying items with help of copy module.
         copy:
           src: /usr/src/finance/blog.txt
           dest: /opt/finance/blog.txt
