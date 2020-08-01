@@ -3,7 +3,7 @@
 		become: true    # to become root
 		gather_facts: false   # not check system configuration
 		tasks:
-		  - name: empty file 
+		  - name: Create an empty file 
 		    file:
 		      path: /tmp/webapp.txt
 		      state: touch
@@ -14,7 +14,7 @@
 		become: true    # to become root
 		gather_facts: false   # not check system configuration
 		tasks:
-		  - name: empty file 
+		  - name: Create an empty file 
 		    file:
 		      path: /tmp/webapp.txt
 		      state: touch
@@ -25,7 +25,7 @@
 		become: true    # to become root
 		gather_facts: false   # not check system configuration
 		tasks:
-		  - name: empty file 
+		  - name: Create an empty file 
 		    file:
 		      path: /tmp/webapp.txt
 		      state: touch
