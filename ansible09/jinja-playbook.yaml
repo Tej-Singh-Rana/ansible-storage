@@ -1,0 +1,12 @@
+- name: Jinja Template Playbook
+  hosts: stapp03
+  gather_facts: true
+  become: true
+  tasks:
+    - name: Using jinja2 Template
+      template:
+        src: /home/thor/ansible/role/httpd/templates/index.html.j2
+        dest: /var/www/html/index.html
+        owner: banner
+        group: banner
+        mode: 0755
