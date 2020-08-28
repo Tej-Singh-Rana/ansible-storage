@@ -1,0 +1,32 @@
+---
+- name: Perform some setup configuration on the Server
+  hosts: all
+  become: true
+  gather_facts: no
+  tasks:
+    - name: Installation of HTTPD package
+      yum:
+        name: httpd
+        state: present
+
+    - name: Service up and running
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: Create a empty file
+      file:
+        path: /var/www/html/index.html
+
+    - name: Adding content
+      shell: echo -n "This is a Nautilus sample file, created using Ansible!" > /var/www/html/index.html
+    
+    - name: Adding extra content in the file
+      lineinfile:
+        path: /var/www/html/index.html
+        insertbefore: '^This'
+        line: 'Welcome to Nautilus Group!'
+        owner: apache
+        group: apache
+        mode: '0755'
