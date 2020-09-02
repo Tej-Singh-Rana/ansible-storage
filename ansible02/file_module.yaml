@@ -1,0 +1,34 @@
+---
+	- hosts: stapp01
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: Create an empty file 
+		    file:
+		      path: /opt/nfsdata.txt
+		      state: touch
+		      mode: '0644'
+		      owner: tony
+		      group: tony
+	- hosts: stapp02
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: Create an empty file 
+		    file:
+		      path: /opt/nfsdata.txt
+		      state: touch
+		      mode: '0644'
+		      owner: steve
+		      group: steve
+	- hosts: stapp03
+		become: true    # to become root
+		gather_facts: false   # not check system configuration
+		tasks:
+		  - name: Create an empty file 
+		    file:
+		      path: /opt/nfsdata.txt
+		      state: touch
+		      mode: '0644'
+		      owner: banner
+		      group: banner
