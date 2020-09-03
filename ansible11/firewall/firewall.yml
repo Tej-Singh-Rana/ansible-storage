@@ -1,0 +1,17 @@
+---
+- name: Starting
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Installation of firewall
+      yum:
+        name: firewalld
+        state: present
+
+    - name: Service enable and Start
+      service:
+          name: firewalld
+          state: started
+          enabled: yes
+           
