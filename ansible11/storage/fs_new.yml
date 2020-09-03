@@ -1,0 +1,9 @@
+---
+- name: fstype
+  gather_facts: false
+  hosts: all
+  become: yes
+  tasks:
+    - filesystem:
+        fstype: ext4
+        dev: /dev/vg_sql/lv_data

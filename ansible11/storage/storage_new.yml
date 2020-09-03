@@ -1,0 +1,23 @@
+---
+- name: storage
+  hosts: test1
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: logical volume
+      lvol:
+        vg: vg_sql
+        size: 1g
+        lv: mssql_db
+
+    - name: filesystem
+      filesystem:
+        fstype: 'ext4'
+        dev: /dev/vg_sql/mssql_db
+
+    - name: mount
+      mount:
+        path: /mnt/mssql
+        state: mounted
+        src: /dev/vg_sql/mssql_db
+        fstype: 'ext4'

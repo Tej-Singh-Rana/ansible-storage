@@ -1,0 +1,10 @@
+---
+- name: volume
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+  - lvol:
+      vg: vg_sql
+      size: 500m
+      lv: lv_data

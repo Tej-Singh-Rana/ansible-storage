@@ -1,0 +1,11 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: no
+  tasks:
+    - name: mounting
+      mount:
+        src: /dev/vg_sql/lv_data
+        state: mounted
+        path: /mnt/data
+        fstype: 'ext4'
