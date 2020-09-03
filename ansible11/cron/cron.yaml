@@ -1,0 +1,24 @@
+---
+ - name: cronjob
+   hosts: localhost
+   become: yes
+   gather_facts: no
+   tasks:
+    - name: Creating empty file
+      file:
+        path: /opt/run.sh
+        state: touch
+        mode: '0755'
+
+    - name: Adding script to execute in the given time duration
+      blockinfile:
+        path: /opt/run.sh
+        block: |
+         echo `date '+%r %d-%m-%Y %a'` "done" >> /opt/log.time
+     
+    - name: add logs with time
+      cron:
+        name: per min log
+        job: sh /opt/run.sh
+
+     
