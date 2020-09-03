@@ -1,0 +1,45 @@
+---- 
+- hosts: test2
+  gather_facts: false
+  become: true
+  tasks:
+    - name: install
+      yum:
+        name:
+          - httpd
+          - firewalld
+        state: present
+
+    - name: service
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+    - name: service
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: change port
+      replace:        
+        path: /etc/httpd/conf/httpd.conf
+        regexp: "^Listen 80"
+        replace: "Listen 8082"
+
+    - name: service of httpd
+      service:
+        name: httpd
+        state: restarted
+        enabled: yes
+
+    - name: rules
+      firewalld:
+        zone: public
+        port: 8082/tcp
+        state: enabled
+        permanent: yes
+        immediate: yes
+
+
+        
