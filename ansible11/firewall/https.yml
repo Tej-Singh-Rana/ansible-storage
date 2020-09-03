@@ -1,0 +1,13 @@
+---
+- name: https protocol
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: rules
+      firewalld:
+        source: 172.20.1.2
+        service: https
+        immediate: yes
+        permanent: yes
+        state: enabled
+        zone: internal

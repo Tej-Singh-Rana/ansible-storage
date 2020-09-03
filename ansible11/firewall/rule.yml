@@ -1,0 +1,12 @@
+---
+- hosts: test2
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: setup rules
+      firewalld:
+        zone: internal
+        source: 172.20.1.101
+        immediate: true
+        state: enabled
+        permanent: yes

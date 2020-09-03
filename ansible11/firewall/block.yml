@@ -1,0 +1,12 @@
+--- 
+- hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: block rules
+      firewalld:
+        zone: block
+        port: 161/udp
+        immediate: yes
+        permanent: yes
+        state: enabled
