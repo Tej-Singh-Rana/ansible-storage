@@ -1,0 +1,13 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: blockinfile module
+      blockinfile:
+        path: /var/www/html/index.html
+        owner: apache
+        group: apache
+        insertbefore: 'This'
+        block: |
+        <message-body>
