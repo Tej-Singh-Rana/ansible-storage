@@ -1,0 +1,11 @@
+---
+- name: Extract data
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Extract data from Github
+      unarchive:
+        src: https://github.com/xyz-name/xyz.zip
+        dest: /root/
+        remote_src: yes

@@ -1,0 +1,16 @@
+---
+- name: Data extract
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Unarchive module
+      unarchive:
+        src: /root/data.tar.gz
+        dest: /srv
+        remote_src: yes
+
+    - name: Removing
+      file:
+        path: /root/data.tar.gz
+        state: absent
