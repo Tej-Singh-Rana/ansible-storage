@@ -1,0 +1,10 @@
+---
+- name: write a expiry date 
+  hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: New user with expiry date
+      user:
+        name: remote-user
+        expires: 1704067199

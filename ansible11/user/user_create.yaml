@@ -1,0 +1,10 @@
+---
+- name: user module
+  hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Create new user
+      user:
+        name: admin
+        uid: 2048
