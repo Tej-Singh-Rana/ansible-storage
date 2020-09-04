@@ -1,0 +1,28 @@
+---
+- name: Special Setup
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Installation
+      yum:
+        name: nginx
+        state: present
+
+    - name: Service
+      service:
+        name: nginx
+        enabled: yes
+        state: started
+
+    - name: Extract
+      unarchive:
+        src: /root/nginx.zip
+        dest: /usr/share/nginx/html
+        remote_src: yes
+
+    - name: Replace
+      replace:
+        path: /usr/share/nginx/html/index.html
+        regexp: 'This is Web Page'
+        replace: 'Replace it No Web Page'
