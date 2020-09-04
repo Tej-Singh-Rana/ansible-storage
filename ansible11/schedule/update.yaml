@@ -1,0 +1,14 @@
+---
+- hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: Update
+      cron:
+        name: 'yum update'
+        cron_file: ansible_yum
+        hour: '8'
+        minute: '5'
+        weekday: '0'
+        user: root
+        job: 'yum -y update'

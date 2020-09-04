@@ -1,0 +1,12 @@
+---
+- hosts: all
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Reboot time
+      cron:
+        name: cleanup
+    #    deprecated    
+    #    reboot: yes
+        special_time: reboot
+        job: 'rm -rf /tmp/*'

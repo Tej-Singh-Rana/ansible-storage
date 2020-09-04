@@ -1,0 +1,13 @@
+---
+- name: Runs script
+  hosts: all
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Memory check
+      cron:
+        name: Check Memory
+        job: 'sh /root/free.sh'
+        minute: '0'
+        hour: '*/1'
+        state: absent

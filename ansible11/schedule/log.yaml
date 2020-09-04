@@ -1,0 +1,12 @@
+---
+- name: collect logs
+  hosts: all
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Create a job
+      cron:
+        name: Clear Lastlog
+        job: 'echo "" > /var/log/lastlog'
+        minute: "0"
+        hour: "0"
