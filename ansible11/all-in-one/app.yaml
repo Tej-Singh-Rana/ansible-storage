@@ -1,0 +1,50 @@
+---
+- name: web server
+  hosts: web_servers
+  gather_facts: false
+  become: yes
+  tasks:
+    - name: Install packages
+      yum:
+        name:
+        - httpd
+        - php
+        - php-mysql
+        - git
+        state: installed
+
+    - name: source code
+      git:
+        repo: https://github.com/kodekloudhub/learning-app-ecommerce.git
+        dest: /var/www/html
+
+    - name: firewalld
+      service:
+        name: firewalld
+        state: started
+        enabled: yes
+
+    - name: firewall rules
+      firewalld:
+        port: "{{ httpd_port }}/tcp"
+        immediate: yes
+        state: enabled
+        permanent: yes
+
+    - name: html pages
+      replace:
+        path: /etc/httpd/conf/httpd.conf
+        regexp: "^DirectoryIndex  index.html"
+        replace: "DirectoryIndex index.php"
+
+    - name: service of httpd
+      service:
+        name: httpd
+        state: started
+        enabled: yes
+
+    - name: source code
+      copy:
+        src: files/index.php
+        dest: /var/www/html/index.php
+

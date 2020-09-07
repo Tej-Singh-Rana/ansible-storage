@@ -1,0 +1,24 @@
+---
+- hosts: db_servers
+  become: true
+  gather_facts: false
+  tasks:
+    - name: Create a new database
+      mysql_db:
+        name: "{{ dbname }}"
+        state: present
+
+    - name: Create a new database user
+      mysql_user:
+        name: "{{ dbuser }}"
+        password: "{{ dbpassword }}"
+        priv: '*.*:ALL'
+        state: present
+
+    - name: Copy files
+      copy:
+        src: files/db-load-script.sql
+        dest: /tmp
+
+    - name: Shell command
+      shell: mysql -f < /tmp/db-load-script.sql

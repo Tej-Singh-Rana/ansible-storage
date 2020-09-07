@@ -1,0 +1,46 @@
+---
+- hosts: all
+  become: true
+  gather_facts: yes
+  tasks:
+    - name: installation
+      yum:
+       name:
+       - libselinux-python
+       - libsemanage-python
+       - firewalld
+       state: installed
+
+- hosts: db_servers
+  gather_facts: false
+  become: true
+  tasks:
+    - name: install
+      yum:
+       name: ["mariadb-server","MySQL-python"]
+       state: installed
+
+    - name: file
+      copy:
+       src: files/my.cnf
+       dest: /etc/my.cnf
+
+    - name: service
+      service:
+       name: mariadb
+       state: started
+       enabled: yes
+
+    - name: service
+      service:
+       name: firewalld
+       state: started
+       enabled: yes
+
+    - name: firewall
+      firewalld:
+         zone: public
+         port: 3306/tcp
+         permanent: yes
+         immediate: true
+         state: enabled
